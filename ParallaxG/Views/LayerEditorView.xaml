@@ -1,0 +1,87 @@
+﻿<!--Expects Layer-->
+<UserControl x:Class="ParallaxG.Views.LayerEditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Foreground="White"
+             Background="#33000000"
+             Height="Auto"
+             Width="Auto"
+             Padding="20">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="TextBox">
+                <Setter Property="Width"
+                        Value="325" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Edit Layer"
+                           FontSize="24"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center" />
+                <Image Source="{Binding Source}"
+                       Width="75"
+                       Margin="12, 4"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center" />
+            </StackPanel>
+
+            <Label Content="Source"
+                   Foreground="White" />
+            <TextBox Text="{Binding Source, Mode=TwoWay}" />
+
+            <Label Content="X Offset"
+                   Foreground="White" />
+            <Slider Minimum="-4000"
+                    Maximum="4000"
+                    TickFrequency="0.1"
+                    Value="{Binding Transform.X, Mode=TwoWay}" />
+
+            <Label Content="Y Offset"
+                   Foreground="White" />
+            <Slider Minimum="-4000"
+                    Maximum="4000"
+                    TickFrequency="0.1"
+                    Value="{Binding Transform.Y, Mode=TwoWay}" />
+
+            <Label Content="Rotation Angle"
+                   Foreground="White" />
+            <Slider Minimum="0"
+                    Maximum="360"
+                    TickFrequency="0.01"
+                    Value="{Binding Transform.Rotation, Mode=TwoWay}" />
+
+            <Label Content="Zoom"
+                   Foreground="White" />
+            <Slider Minimum="0"
+                    Maximum="10"
+                    TickFrequency="0.01"
+                    Value="{Binding Transform.Zoom, Mode=TwoWay}" />
+
+            <Label Content="Opacity"
+                   Foreground="White" />
+            <Slider Minimum="0"
+                    Maximum="1"
+                    TickFrequency="0.01"
+                    Value="{Binding Effect.Opacity, Mode=TwoWay}" />
+
+            <Label Content="Blur"
+                   Foreground="White" />
+            <Slider Minimum="0"
+                    Maximum="24"
+                    TickFrequency="0.01"
+                    Value="{Binding Effect.Blur, Mode=TwoWay}" />
+        </StackPanel>
+
+    </Grid>
+</UserControl>

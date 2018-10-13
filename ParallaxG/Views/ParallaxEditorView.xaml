@@ -1,0 +1,73 @@
+﻿<!--Expects ParallaxViewModel-->
+<UserControl x:Name="userControl"
+             x:Class="ParallaxG.Views.ParallaxEditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Custom="clr-namespace:ParallaxG.CustomControls"
+             xmlns:Attachable="clr-namespace:ParallaxG.Attachable"
+             xmlns:Views="clr-namespace:ParallaxG.Views">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="Width"
+                        Value="200" />
+                <Setter Property="Margin"
+                        Value="2" />
+                <Setter Property="Padding"
+                        Value="2" />
+            </Style>
+
+            <Custom:FlyoutControl x:Key="editLayerFlyout">
+                <Views:LayerEditorView DataContext="{Binding SelectedLayer}"
+                                       HorizontalAlignment="Left"
+                                       VerticalAlignment="Bottom"
+                                       Margin="100,0,0,50" />
+            </Custom:FlyoutControl>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <ScrollViewer Grid.RowSpan="2"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <ItemsControl ItemsSource="{Binding SelectedParallax.Layers}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Button Command="{Binding DataContext.SelectLayerCommand, ElementName=userControl}"
+                                        CommandParameter="{Binding}"
+                                        Width="100"
+                                        Height="100"
+                                        HorizontalContentAlignment="Stretch"
+                                        VerticalContentAlignment="Stretch"
+                                        Attachable:FlyoutAttach.Flyout="{StaticResource editLayerFlyout}">
+                                    <Grid>
+                                        <Viewbox>
+                                            <Image Source="{Binding Source}" />
+                                        </Viewbox>
+                                        <Button Command="{Binding DataContext.RemoveLayerCommand, ElementName=userControl}"
+                                                CommandParameter="{Binding}"
+                                                VerticalAlignment="Top"
+                                                HorizontalAlignment="Right"
+                                                Width="30"
+                                                Height="30">
+                                            <Image Source="/ParallaxG;component/Images/trash.png" />
+                                        </Button>
+                                    </Grid>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <Button Command="{Binding AddNewLayerCommand}"
+                        Width="100"
+                        Height="100">
+                    <Image Source="/ParallaxG;component/Images/plus.png"
+                           Margin="8" />
+                </Button>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
